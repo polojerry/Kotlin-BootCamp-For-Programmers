@@ -1,4 +1,4 @@
-package l2
+package l2Functions
 
 fun main(args : Array<String>) {
     //variable from main and string template ${}

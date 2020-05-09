@@ -1,4 +1,4 @@
-package l2
+package l2Functions
 
 import kotlin.random.Random
 
@@ -65,6 +65,8 @@ fun dirtProcessor() {
     dirty = updateDirty(dirty) {
             dirty-> dirty+50
     }
+
+    println("Ultimate Dirt $dirty")
 }
 
 fun randomDay(): String {
