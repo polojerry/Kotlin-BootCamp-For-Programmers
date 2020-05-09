@@ -5,6 +5,18 @@ import kotlin.random.Random
 fun main(args: Array<String>) {
     println("Hello ${args[0]}")
     feedTheFish()
+
+    var bubbles = 0
+    while (bubbles<50){
+        bubbles++
+    }
+
+    //repeats (function from stdlib
+    repeat(2){
+        println("Fish is Swimming")
+    }
+
+
 }
 
 fun feedTheFish() {
@@ -14,13 +26,14 @@ fun feedTheFish() {
     println("Today is ${day}, the fish eats $food")
 
     shouldChangeTheWater(day)
-    shouldChangeTheWater(day, 20, 50)
+    shouldChangeTheWater(day, 20, getDirtySensorReading())
     shouldChangeTheWater(day, dirty = 50)
 
     if (shouldChangeTheWater(day)) {
         println("Change the water")
     }
 }
+
 
 fun randomDay(): String {
     val week = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
@@ -54,3 +67,5 @@ fun shouldChangeTheWater(day: String, temperature: Int = 22, dirty: Int = 10): B
 fun isTooHot(temperature: Int) = temperature > 30
 fun isDirty(dirty: Int) = dirty > 30
 fun isSunday(day: String) = day == "Sunday"
+
+fun getDirtySensorReading(): Int  = 20
