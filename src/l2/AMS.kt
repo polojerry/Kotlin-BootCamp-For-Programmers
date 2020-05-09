@@ -5,18 +5,34 @@ import kotlin.random.Random
 fun main(args: Array<String>) {
     println("Hello ${args[0]}")
     feedTheFish()
+    bubbling()
+    exampleFiltering()
 
+}
+
+fun exampleFiltering() {
+    val decorations = listOf("rock", "pagoda", "plastic plants", "alligator", "flower pots")
+
+    //eager filtering
+    val eagerFiltering = decorations.filter { it[0] == 'p' }
+    println("Eager Filtered List: $eagerFiltering")
+
+    //lazy
+    val lazyFiltering = decorations.asSequence().filter { it[0] == 'p' }
+    println("Lazily Filtered List: $lazyFiltering")
+    println("Lazily Filtered List: ${lazyFiltering.toList()}")
+}
+
+private fun bubbling() {
     var bubbles = 0
-    while (bubbles<50){
+    while (bubbles < 50) {
         bubbles++
     }
 
     //repeats (function from stdlib
-    repeat(2){
+    repeat(2) {
         println("Fish is Swimming")
     }
-
-
 }
 
 fun feedTheFish() {
