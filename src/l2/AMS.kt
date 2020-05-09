@@ -1,19 +1,21 @@
 package l2
 
-fun main(args : Array<String>) {
-    //variable from main and string template ${}
+import kotlin.random.Random
+
+fun main(args: Array<String>){
     println("Hello ${args[0]}")
+    feedTheFish()
+}
 
-    val isUnit = println("Is Unit")
-    println(isUnit)
+fun feedTheFish() {
+    val day = randomDay()
+    val food = "pellets"
 
-    val fishTemp = 10
+    println("Today is ${day}, the fish eats $food")
+}
 
-    //using value of expression
-    val isHot = if(fishTemp>50) true else false
-    println(isHot)
+fun randomDay(): String {
+    val week = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    return week[Random.nextInt(7)]
 
-    //using value of expression and string template ${}
-    val message = "You are a ${if(fishTemp>10) "Safe" else "fried" }fish"
-    println(message)
 }
