@@ -17,7 +17,7 @@ fun feedTheFish() {
     shouldChangeTheWater(day, 20, 50)
     shouldChangeTheWater(day, dirty = 50)
 
-    if(shouldChangeTheWater(day)){
+    if (shouldChangeTheWater(day)) {
         println("Change the water")
     }
 }
@@ -31,7 +31,7 @@ fun randomDay(): String {
 fun fishFood(day: String): String {
     return when (day) {
         "Sunday" -> "plankton"
-        "Monday" ->"flakes"
+        "Monday" -> "flakes"
         "Tuesday" -> "pellets"
         "Wednesday" -> "red worms"
         "Thursday" -> "granules"
@@ -41,6 +41,16 @@ fun fishFood(day: String): String {
     }
 }
 
-fun shouldChangeTheWater(day: String, temperature : Int = 22, dirty: Int = 10 ) : Boolean{
-    return true
+fun shouldChangeTheWater(day: String, temperature: Int = 22, dirty: Int = 10): Boolean {
+
+    return when {
+        isTooHot(temperature) -> true
+        isDirty(dirty) -> true
+        isSunday(day) -> true
+        else -> false
+    }
 }
+
+fun isTooHot(temperature: Int) = temperature > 30
+fun isDirty(dirty: Int) = dirty > 30
+fun isSunday(day: String) = day == "Sunday"
