@@ -2,6 +2,7 @@ package l3Classes
 
 fun main ( args : Array<String>){
     buildAquarium()
+    makeFish()
 }
 
 private fun buildAquarium() {
@@ -27,4 +28,14 @@ private fun printProperties(aquarium: Aquarium, name: String) {
                 "Height = ${aquarium.height}cm  " +
                 "and The Volume is ${aquarium.volume}litres"
     )
+}
+
+fun makeFish(){
+    val shark = Shark()
+    val pleco  =  Plecostomus()
+
+    println("Shark is ${shark.color}, Plecostomus is ${pleco.color}")
+
+    shark.eat()
+    pleco.eat()
 }
