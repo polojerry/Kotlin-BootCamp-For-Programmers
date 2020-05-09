@@ -10,17 +10,21 @@ fun main(args: Array<String>) {
 
 }
 
-fun exampleFiltering() {
-    val decorations = listOf("rock", "pagoda", "plastic plants", "alligator", "flower pots")
+fun feedTheFish() {
+    val day = randomDay()
+    val food = fishFood(day)
 
-    //eager filtering
-    val eagerFiltering = decorations.filter { it[0] == 'p' }
-    println("Eager Filtered List: $eagerFiltering")
+    println("Today is ${day}, the fish eats $food")
 
-    //lazy
-    val lazyFiltering = decorations.asSequence().filter { it[0] == 'p' }
-    println("Lazily Filtered List: $lazyFiltering")
-    println("Lazily Filtered List: ${lazyFiltering.toList()}")
+    shouldChangeTheWater(day)
+    shouldChangeTheWater(day, 20, getDirtySensorReading())
+    shouldChangeTheWater(day, dirty = 50)
+
+    if (shouldChangeTheWater(day)) {
+        println("Change the water")
+    }
+
+    dirtProcessor()
 }
 
 private fun bubbling() {
@@ -35,21 +39,33 @@ private fun bubbling() {
     }
 }
 
-fun feedTheFish() {
-    val day = randomDay()
-    val food = fishFood(day)
+fun exampleFiltering() {
+    val decorations = listOf("rock", "pagoda", "plastic plants", "alligator", "flower pots")
 
-    println("Today is ${day}, the fish eats $food")
+    //eager filtering
+    val eagerFiltering = decorations.filter { it[0] == 'p' }
+    println("Eager Filtered List: $eagerFiltering")
 
-    shouldChangeTheWater(day)
-    shouldChangeTheWater(day, 20, getDirtySensorReading())
-    shouldChangeTheWater(day, dirty = 50)
-
-    if (shouldChangeTheWater(day)) {
-        println("Change the water")
-    }
+    //lazy
+    val lazyFiltering = decorations.asSequence().filter { it[0] == 'p' }
+    println("Lazily Filtered List: $lazyFiltering")
+    println("Lazily Filtered List: ${lazyFiltering.toList()}")
 }
 
+var dirty = 20
+val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+fun feedFish(dirty: Int) = dirty + 10
+fun updateDirty(dirty: Int, operation : (Int)-> Int) : Int{
+    return operation(dirty)
+}
+
+fun dirtProcessor() {
+    dirty = updateDirty(dirty, waterFilter)
+    dirty  = updateDirty(dirty, ::feedFish)
+    dirty = updateDirty(dirty) {
+            dirty-> dirty+50
+    }
+}
 
 fun randomDay(): String {
     val week = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
@@ -84,4 +100,4 @@ fun isTooHot(temperature: Int) = temperature > 30
 fun isDirty(dirty: Int) = dirty > 30
 fun isSunday(day: String) = day == "Sunday"
 
-fun getDirtySensorReading(): Int  = 20
+fun getDirtySensorReading(): Int = 20
